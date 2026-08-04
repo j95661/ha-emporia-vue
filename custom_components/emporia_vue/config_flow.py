@@ -13,7 +13,6 @@ from homeassistant import config_entries, exceptions
 from homeassistant.const import CONF_EMAIL, CONF_PASSWORD
 import homeassistant.helpers.config_validation as cv
 
-from .api_v1 import apply_v1_compatibility
 from .const import (
     AUTH_METHOD,
     AUTH_METHOD_EMAIL_PASSWORD,
@@ -55,6 +54,10 @@ class VueHub:
 
     def __init__(self) -> None:
         """Initialize."""
+        # Import lazily so the config flow handler can load even if the
+        # compatibility layer fails; the failure is then shown in the form.
+        from .api_v1 import apply_v1_compatibility
+
         self.vue = apply_v1_compatibility(PyEmVue())
 
     async def authenticate(self, data: dict | Mapping[str, Any]) -> bool:
