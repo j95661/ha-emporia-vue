@@ -28,6 +28,7 @@ from .const import (
     ENABLE_1D,
     ENABLE_1M,
     ENABLE_1MON,
+    PASSWORD_SELECTOR,
     SOLAR_INVERT,
     TOKEN_CONFIG_FLOW_SCHEMA,
 )
@@ -145,7 +146,6 @@ class ConfigFlow(config_entries.ConfigFlow, domain=DOMAIN):
     """Handle a config flow for Emporia Vue."""
 
     VERSION = 1
-    CONNECTION_CLASS = config_entries.CONN_CLASS_CLOUD_POLL
 
     async def async_step_user(self, user_input=None) -> config_entries.ConfigFlowResult:
         """Handle the initial step."""
@@ -327,9 +327,9 @@ class ConfigFlow(config_entries.ConfigFlow, domain=DOMAIN):
                 step_id="reauth_confirm",
                 data_schema=vol.Schema(
                     {
-                        vol.Required(CONF_ID_TOKEN): cv.string,
-                        vol.Required(CONF_ACCESS_TOKEN): cv.string,
-                        vol.Required(CONF_REFRESH_TOKEN): cv.string,
+                        vol.Required(CONF_ID_TOKEN): PASSWORD_SELECTOR,
+                        vol.Required(CONF_ACCESS_TOKEN): PASSWORD_SELECTOR,
+                        vol.Required(CONF_REFRESH_TOKEN): PASSWORD_SELECTOR,
                     }
                 ),
                 errors=errors,
@@ -341,7 +341,7 @@ class ConfigFlow(config_entries.ConfigFlow, domain=DOMAIN):
                     vol.Required(
                         CONF_EMAIL, default=existing_entry.data[CONF_EMAIL]
                     ): cv.string,
-                    vol.Required(CONF_PASSWORD): cv.string,
+                    vol.Required(CONF_PASSWORD): PASSWORD_SELECTOR,
                 }
             ),
             errors=errors,
