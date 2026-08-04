@@ -1,4 +1,4 @@
-"""Config flow for Emporia Vue integration."""
+﻿"""Config flow for Emporia Vue integration."""
 
 import asyncio
 from collections.abc import Mapping
@@ -13,6 +13,7 @@ from homeassistant import config_entries, exceptions
 from homeassistant.const import CONF_EMAIL, CONF_PASSWORD
 import homeassistant.helpers.config_validation as cv
 
+from .api_v1 import apply_v1_compatibility
 from .const import (
     AUTH_METHOD,
     AUTH_METHOD_EMAIL_PASSWORD,
@@ -54,7 +55,7 @@ class VueHub:
 
     def __init__(self) -> None:
         """Initialize."""
-        self.vue = PyEmVue()
+        self.vue = apply_v1_compatibility(PyEmVue())
 
     async def authenticate(self, data: dict | Mapping[str, Any]) -> bool:
         """Test if we can authenticate with the host."""

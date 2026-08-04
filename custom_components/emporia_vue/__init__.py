@@ -1,4 +1,4 @@
-"""The Emporia Vue integration."""
+﻿"""The Emporia Vue integration."""
 
 import asyncio
 import calendar
@@ -36,6 +36,7 @@ from homeassistant.helpers import entity_registry as er
 from homeassistant.helpers.typing import ConfigType
 from homeassistant.helpers.update_coordinator import DataUpdateCoordinator, UpdateFailed
 
+from .api_v1 import apply_v1_compatibility
 from .const import (
     AUTH_METHOD,
     AUTH_METHOD_EMAIL_PASSWORD,
@@ -155,7 +156,7 @@ async def async_setup_entry(hass: HomeAssistant, entry: ConfigEntry) -> bool:
     )
     if SOLAR_INVERT in entry_data:
         INVERT_SOLAR = entry_data[SOLAR_INVERT]
-    vue = PyEmVue()
+    vue = apply_v1_compatibility(PyEmVue())
     loop: asyncio.AbstractEventLoop = asyncio.get_event_loop()
     try:
         result: bool = await async_login_vue(loop, vue, entry_data)
