@@ -1,4 +1,4 @@
-﻿"""Compatibility shims for Emporia's migrated /v1 API.
+"""Compatibility shims for Emporia's migrated /v1 API.
 
 PyEmVue 0.18.x still targets the legacy endpoints and camelCase payloads.
 The Emporia web/app now uses /v1 paths, Authorization Bearer tokens, and

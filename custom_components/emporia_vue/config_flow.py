@@ -1,4 +1,4 @@
-﻿"""Config flow for Emporia Vue integration."""
+"""Config flow for Emporia Vue integration."""
 
 import asyncio
 from collections.abc import Mapping

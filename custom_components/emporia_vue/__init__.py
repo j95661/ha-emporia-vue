@@ -1,4 +1,4 @@
-﻿"""The Emporia Vue integration."""
+"""The Emporia Vue integration."""
 
 import asyncio
 import calendar
